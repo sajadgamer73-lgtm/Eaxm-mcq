@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>اختبار تركيب ومعمارية الحاسوب</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+    </style>
+</head>
+<body class="bg-slate-900 text-slate-100 min-h-screen flex flex-col justify-between">
+
+    <!-- Header / Navbar -->
+    <header class="bg-slate-800 border-b border-slate-700 py-4 px-6 shadow-md">
+        <div class="max-w-4xl mx-auto flex justify-between items-center">
+            <h1 class="text-xl font-bold text-blue-400">امتحان معمارية الحاسوب | Computer Architecture Exam</h1>
+            <span id="student-badge" class="hidden bg-blue-600 text-white text-sm px-3 py-1 rounded-full"></span>
+        </div>
+    </header>
+
+    <!-- Main Container -->
+    <main class="max-w-3xl w-full mx-auto p-4 sm:p-6 my-auto flex-grow flex items-center justify-center">
+
+        <!-- Step 1: Welcome & Student Name Input -->
+        <div id="welcome-screen" class="bg-slate-800 border border-slate-700 rounded-xl p-6 sm:p-8 shadow-xl w-full text-center">
+            <h2 class="text-2xl sm:text-3xl font-bold mb-4 text-white">أهلاً بك في اختبار معمارية الحاسوب</h2>
+            <p class="text-slate-300 mb-6 text-sm sm:text-base">Welcome to the Computer Architecture Interactive Quiz. Please enter your full name to start the exam.</p>
+            
+            <div class="mb-6 text-right">
+                <label for="fullName" class="block text-sm font-medium text-slate-300 mb-2">اسم الطالب الثلاثي (Full Name):</label>
+                <input type="text" id="fullName" placeholder="ادخل اسمك هنا..." class="w-full bg-slate-900 border border-slate-700 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-blue-500">
+            </div>
+
+            <button onclick="startQuiz()" class="w-full bg-blue-600 hover:bg-blue-500 text-white font-semibold py-3 px-6 rounded-lg transition duration-200">
+                بدء الامتحان (Start Exam)
+            </button>
+        </div>
+
+        <!-- Step 2: Quiz Screen -->
+        <div id="quiz-screen" class="hidden bg-slate-800 border border-slate-700 rounded-xl p-6 sm:p-8 shadow-xl w-full">
+            <!-- Progress Bar -->
+            <div class="mb-6">
+                <div class="flex justify-between text-sm text-slate-400 mb-2">
+                    <span id="progress-text">السؤال 1 من 52</span>
+                    <span id="progress-percent">2%</span>
+                </div>
+                <div class="w-full bg-slate-700 h-2.5 rounded-full overflow-hidden">
+                    <div id="progress-bar" class="bg-blue-500 h-2.5 rounded-full transition-all duration-300" style="width: 0%"></div>
+                </div>
+            </div>
+
+            <!-- Question Card -->
+            <div class="mb-6">
+                <span class="text-xs uppercase tracking-wider bg-slate-700 text-blue-300 px-2.5 py-1 rounded">Question <span id="q-num">1</span></span>
+                <h3 id="question-text-en" class="text-lg sm:text-xl font-bold text-white mt-3"></h3>
+                <p id="question-text-ar" class="text-sm sm:text-base text-slate-300 mt-1 italic"></p>
+            </div>
+
+            <!-- Options -->
+            <div id="options-container" class="space-y-3 mb-8">
+                <!-- Dynamic Options injected here -->
+            </div>
+
+            <!-- Navigation Buttons -->
+            <div class="flex justify-between items-center pt-4 border-t border-slate-700">
+                <button id="prev-btn" onclick="prevQuestion()" class="bg-slate-700 hover:bg-slate-600 text-white px-4 py-2 rounded-lg text-sm transition disabled:opacity-50" disabled>
+                    السابق (Previous)
+                </button>
+                <button id="next-btn" onclick="nextQuestion()" class="bg-blue-600 hover:bg-blue-500 text-white px-6 py-2 rounded-lg text-sm transition">
+                    التالي (Next)
+                </button>
+            </div>
+        </div>
+
+        <!-- Step 3: Result Screen -->
+        <div id="result-screen" class="hidden bg-slate-800 border border-slate-700 rounded-xl p-6 sm:p-8 shadow-xl w-full text-center">
+            <h2 class="text-2xl sm:text-3xl font-bold mb-2 text-white">نتيجة الامتحان (Exam Results)</h2>
+            <p id="result-student-name" class="text-blue-400 font-semibold mb-6"></p>
+
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-6">
+                <div class="bg-slate-900 p-4 rounded-lg border border-slate-700">
+                    <p class="text-slate-400 text-sm">النتيجة النهائية (Score)</p>
+                    <p id="score-percentage" class="text-2xl font-bold text-blue-400 mt-1">0%</p>
+                </div>
+                <div class="bg-slate-900 p-4 rounded-lg border border-slate-700">
+                    <p class="text-slate-400 text-sm">الإجابات الصحيحة (Correct)</p>
+                    <p id="correct-count" class="text-2xl font-bold text-emerald-400 mt-1">0</p>
+                </div>
+                <div class="bg-slate-900 p-4 rounded-lg border border-slate-700">
+                    <p class="text-slate-400 text-sm">الإجابات الخاطئة (Incorrect)</p>
+                    <p id="incorrect-count" class="text-2xl font-bold text-rose-400 mt-1">0</p>
+                </div>
+            </div>
+
+            <div class="flex flex-col sm:flex-row gap-3 justify-center mb-6">
+                <button onclick="downloadResultFile()" class="bg-emerald-600 hover:bg-emerald-500 text-white font-semibold py-2.5 px-6 rounded-lg text-sm transition">
+                    تحميل النتيجة كملف نصي (.txt)
+                </button>
+                <button onclick="showReviewScreen()" class="bg-slate-700 hover:bg-slate-600 text-white font-semibold py-2.5 px-6 rounded-lg text-sm transition">
+                    مراجعة الإجابات (Review Answers)
+                </button>
+            </div>
+        </div>
+
+        <!-- Step 4: Review Screen -->
+        <div id="review-screen" class="hidden bg-slate-800 border border-slate-700 rounded-xl p-6 sm:p-8 shadow-xl w-full text-left" dir="ltr">
+            <h2 class="text-2xl font-bold mb-4 text-white text-center">Review Answers & Explanations</h2>
+            <div id="review-container" class="space-y-6 max-h-[60vh] overflow-y-auto pr-2 mb-6">
+                <!-- Review items injected here -->
+            </div>
+            <div class="text-center">
+                <button onclick="location.reload()" class="bg-blue-600 hover:bg-blue-500 text-white font-semibold py-2 px-6 rounded-lg text-sm transition">
+                    إعادة الامتحان (Restart Quiz)
+                </button>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-slate-800 border-t border-slate-700 py-4 text-center text-xs text-slate-500">
+        Computer Architecture Interactive Exam &copy; 2026
+    </footer>
+
+    <!-- Script Logic -->
+    <script>
+        const questions = [
+            {
+                en: "What does ALU stand for in computer architecture?",
+                ar: "ما ماذا تعني اختصار ALU في معمارية الحاسوب؟",
+                options: ["Arithmetic and Logic Unit", "Array Length Utility", "Automated Local Unit", "Address Link Utility"],
+                answer: 0,
+                explanation: "ALU stands for Arithmetic and Logic Unit, responsible for performing desired operations on input information."
+            },
+            {
+                en: "What is the function of the Program Counter (PC)?",
+                ar: "ما هي وظيفة عداد البرنامج (PC)؟",
+                options: ["Stores the current instruction", "Holds the address of the next instruction to be fetched and executed", "Stores data results", "Controls system bus signals"],
+                answer: 1,
+                explanation: "Program Counter (PC) holds the address of the next instruction to be fetched and executed."
+            },
+            {
+                en: "What does the Memory Address Register (MAR) contain?",
+                ar: "ماذا يحتوي مسجل عنوان الذاكرة (MAR)؟",
+                options: ["The data being read", "The address of the memory location to be accessed", "The current instruction", "Status flags"],
+                answer: 1,
+                explanation: "MAR register contains the address of the memory location addressed."
+            },
+            {
+                en: "In a byte-addressable memory with k bits used for the address, what is the total memory size?",
+                ar: "في ذاكرة قابلة للعنوانة بايت بـ k من البتات للعنوان، ما هو الحجم الكلي للذاكرة؟",
+                options: ["2^k bytes", "k^2 bytes", "8 * k bytes", "2 * k bytes"],
+                answer: 0,
+                explanation: "Size of memory in bytes is given by 2^k where k is the number of address bits."
+            },
+            {
+                en: "How many bytes are in a memory with a 16-bit address?",
+                ar: "كم عدد البايتات في ذاكرة ذات عنوان 16 بت؟",
+                options: ["32768 bytes", "65536 bytes", "1024 bytes", "16384 bytes"],
+                answer: 1,
+                explanation: "For a 16-bit address, size = 2^16 = 65536 bytes."
+            },
+            {
+                en: "What is the primary characteristic of volatile memory like RAM?",
+                ar: "ما هي الخصائص الأساسية للذاكرة المتطايرة مثل RAM؟",
+                options: ["Retains data without power", "Stored data are lost when electrical power is lost", "Can only be read once", "Stores firmware permanently"],
+                answer: 1,
+                explanation: "A memory is volatile if its stored data are lost when electrical power is lost."
+            },
+            {
+                en: "Which RAM type stores data as a charge on a capacitor and requires periodic refreshing?",
+                ar: "أي نوع من RAM يخزن البيانات كشحنة على مكثف ويتطلب إنعاشاً دورياً؟",
+                options: ["Static RAM (SRAM)", "Dynamic RAM (DRAM)", "ROM", "Cache memory"],
+                answer: 1,
+                explanation: "Dynamic RAMs (DRAMs) store data bits as a charge on a capacitor and require refresh circuitry."
+            },
+            {
+                en: "Which RAM type uses semiconductor latch memory cells and is faster but more expensive?",
+                ar: "أي نوع RAM يستخدم خلايا البوابات المنطقية شبه الموصلة وهو أسرع ولكنه أغلى ثمناً؟",
+                options: ["DRAM", "SRAM", "EEPROM", "Flash"],
+                answer: 1,
+                explanation: "SRAM uses semiconductor latch memory cells and is faster than DRAM but more complex and expensive."
+            },
+            {
+                en: "What is the mechanism used to erase data in a UV EPROM chip?",
+                ar: "ما هي الآلية المستخدمة لمسح البيانات في رقاقة UV EPROM؟",
+                options: ["Electrical voltage pulse", "Exposure to high intensity ultraviolet radiation", "Magnetic field reversal", "Thermal heating"],
+                answer: 1,
+                explanation: "Erasure is done by exposure of the memory array chip to high intensity ultraviolet radiation through the quartz window."
+            },
+            {
+                en: "What does EEPROM stand for?",
+                ar: "ماذا يقصد بـ EEPROM؟",
+                options: ["Electronically Erasable Programmable Read Only Memory", "Electrically Erasable Programmable Read Only Memory", "Energy Efficient Programmable Read Only Memory", "Extended Error Programmable Read Only Memory"],
+                answer: 1,
+                explanation: "EEPROM stands for Electrically Erasable Programmable Read Only Memory."
+            },
+            {
+                en: "What is a major limitation or drawback of Flash memory?",
+                ar: "ما هو أحد العيوب أو القيود الرئيسية لذاكرة الفلاش؟",
+                options: ["It is volatile", "It has a large but finite number of read/write cycles and block-level erasing", "It cannot be read electronically", "It requires constant refreshing like DRAM"],
+                answer: 1,
+                explanation: "Flash memory bits set to 0 can be reset to 1 only by erasing an entire block, and it has a finite number of cycles."
+            },
+            {
+                en: "What does FIFO stand for in memory structures?",
+                ar: "ماذا يقصد بـ FIFO في هياكل الذاكرة؟",
+                options: ["First In-First Out", "Fast Input Fast Output", "Fixed Instruction Fixed Operand", "File Index File Organization"],
+                answer: 0,
+                explanation: "FIFO means first in-first out, used in applications where two systems communicate at different rates."
+            },
+            {
+                en: "In microprocessors, what is the portion of RAM devoted to LIFO (Last In-First Out) operations called?",
+                ar: "في المعالجات الدقيقة، ما هو جزء الذاكرة المخصص لعمليات LIFO يسمى؟",
+                options: ["The Cache", "The Stack", "The Register file", "The Bus buffer"],
+                answer: 1,
+                explanation: "A portion of RAM devoted to LIFO is called the stack, managed by a stack pointer."
+            },
+            {
+                en: "In the memory hierarchy, which storage level has the fastest access time and highest cost?",
+                ar: "في التسلسل الهرمي للذاكرة، أي مستوى تخزين لديه أسرع وقت وصول وأعلى تكلفة؟",
+                options: ["Main Memory", "Hard Disk", "Registers", "Optical Disk"],
+                answer: 2,
+                explanation: "Registers sit at the top of the memory hierarchy with 1ns-2ns access time and highest cost."
+            },
+            {
+                en: "What is the formula for Miss Rate in cache memory?",
+                ar: "ما هي معادلة معدل الفقد (Miss Rate) في الذاكرة المخبأة؟",
+                options: ["1 - Hit Rate", "Hit Rate / 2", "1 + Hit Rate", "Hit Time * Miss Penalty"],
+                answer: 0,
+                explanation: "Miss Rate = 1 - Hit Rate."
+            },
+            {
+                en: "Which cache mapping technique specifies a single cache line for each memory block?",
+                ar: "أي تقنية ربط للذاكرة المخبأة تحدد خط ذاكرة مخبأة واحداً لكل كتلة ذاكرة؟",
+                options: ["Associative Mapping", "Direct Mapping", "Set-Associative Mapping", "Random Mapping"],
+                answer: 1,
+                explanation: "Direct Mapping specifies a single cache line for each memory block."
+            },
+            {
+                en: "What are the multiplexed lower address and data lines on the 8086 microprocessor?",
+                ar: "ما هي خطوط العناوين والبيانات السفلى المتعددة الإرسال في معالج 8086؟",
+                options: ["A0-A15", "AD0-AD15", "D0-D63", "S0-S2"],
+                answer: 1,
+                explanation: "AD0-AD15 are the low order address bus lines multiplexed with data."
+            },
+            {
+                en: "What signal indicates the operating mode (Minimum or Maximum) of the 8086 microprocessor?",
+                ar: "ما هي الإشارة التي تحدد وضع التشغيل (الحد الأدنى أو الأقصى) لمعالج 8086؟",
+                options: ["RESET", "MN/MX (Active low)", "READY", "TEST"],
+                answer: 1,
+                explanation: "Minimum or maximum mode operations are decided by the pin MN/MX."
+            },
+            {
+                en: "What is the function of the ALE (Address Latch Enable) signal in 8086?",
+                ar: "ما هي وظيفة إشارة ALE في معالج 8086؟",
+                options: ["Indicates a write cycle", "Demultiplexes address and data lines using external latches", "Requests bus control", "Acknowledges interrupts"],
+                answer: 1,
+                explanation: "ALE is used to demultiplex the address and data lines using external latches."
+            },
+            {
+                en: "How many clock states
