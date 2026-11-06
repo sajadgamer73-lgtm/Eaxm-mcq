@@ -261,4 +261,389 @@
                 explanation: "ALE is used to demultiplex the address and data lines using external latches."
             },
             {
-                en: "How many clock states
+                en: "How many clock states typically comprise a standard bus cycle in 8086 minimum mode?",
+                ar: "كم عدد دورات الساعة التي تشكل عادة دورة الناقل القياسية في وضع الحد الأدنى لـ 8086؟",
+                options: ["Two states (T1, T2)", "Four clock states (T1, T2, T3, T4)", "Six states", "One state"],
+                answer: 1,
+                explanation: "A typical bus cycle consists of four clock states: T1, T2, T3, and T4."
+            },
+            {
+                en: "What is inserted when a peripheral device is too slow to respond during an 8086 bus cycle?",
+                ar: "ما الذي يتم إدخاله عندما يكون الجهاز الطرفي بطيئاً جداً للاستجابة أثناء دورة الناقل لـ 8086؟",
+                options: ["Clock pulses", "Wait States (Tw)", "Interrupt requests", "Parity checks"],
+                answer: 1,
+                explanation: "When a peripheral device is too slow, one or more wait states (Tw) may be inserted."
+            },
+            {
+                en: "What does the M/IO# signal specify in the 8086/Pentium architecture?",
+                ar: "ماذا تحدد إشارة M/IO# في معمارية 8086/Pentium؟",
+                options: ["Memory access vs I/O access", "Read vs Write operation", "Master vs Slave mode", "Cache hit vs miss"],
+                answer: 0,
+                explanation: "M/IO# distinguishes between memory access and I/O access."
+            },
+            {
+                en: "What is the purpose of the READY input line in the 8086 microprocessor?",
+                ar: "ما الغرض من خط إدخال READY في معالج 8086؟",
+                options: ["To reset the CPU", "Allows 8086 to work with slower external devices by extending the bus cycle", "To initiate DMA transfer", "To acknowledge hardware interrupts"],
+                answer: 1,
+                explanation: "The READY input allows the 8086 to work with slower external devices by introducing wait states when pulled low."
+            },
+            {
+                en: "What are pins A16/S3 to A19/S6 used for during T1 in the 8086 processor?",
+                ar: "لماذا تُستخدم الأطراف A16/S3 إلى A19/S6 خلال الفترة T1 في معالج 8086؟",
+                options: ["Status signals", "High order address bus lines", "Data bus lines", "Control signals"],
+                answer: 1,
+                explanation: "During T1, A16-A19 carry high-order address information, and later carry status signals S3-S6."
+            },
+            {
+                en: "What does the DT/R# signal control in the 8086 minimum mode?",
+                ar: "ماذا تحكم إشارة DT/R# في وضع الحد الأدنى لـ 8086؟",
+                options: ["Direction of data flow through data transceivers", "Data or code access", "Memory or I/O selection", "Interrupt priority"],
+                answer: 0,
+                explanation: "DT/R (Data Transmit/Receive) controls the direction of data flow through the data transceivers."
+            },
+            {
+                en: "What is the function of the DEN# (Data Enable) signal?",
+                ar: "ما هي وظيفة إشارة DEN# (تمكين البيانات)؟",
+                options: ["Output enable for the transceivers", "Latches the address", "Selects the memory chip", "Clears the instruction queue"],
+                answer: 0,
+                explanation: "DEN is used as output enable for the transceivers during data transfer."
+            },
+            {
+                en: "In maximum mode 8086, what do status signals S2, S1, S0 indicate?",
+                ar: "في وضع الحد الأقصى لـ 8086، ماذا تشير إشارات الحالة S2, S1, S0؟",
+                options: ["The type of machine cycle currently being executed", "Queue status", "Bus request status", "Parity error state"],
+                answer: 0,
+                explanation: "S2, S1, S0 are status signals used by the 8086 bus controller to generate bus timing and control cycle types."
+            },
+            {
+                en: "What is the function of Queue Status signals QS0 and QS1 in maximum mode?",
+                ar: "ما هي وظيفة إشارات حالة طابور الأوامر QS0 و QS1 في وضع الحد الأقصى؟",
+                options: ["Indicate internal status of the instruction queue in 8086", "Control memory read/write", "Manage DMA hold requests", "Provide clock synchronization"],
+                answer: 0,
+                explanation: "QS0 and QS1 provide the status of the instruction queue so external devices can track internal queue operations."
+            },
+            {
+                en: "What is the function of RQ/GT0 and RQ/GT1 pins in the maximum mode of 8086?",
+                ar: "ما هي وظيفة أطراف RQ/GT0 و RQ/GT1 في وضع الحد الأقصى لـ 8086؟",
+                options: ["Bus Request / Bus Grant for local bus masters", "Reset and Initialization", "Non-maskable interrupts", "Parity checking"],
+                answer: 0,
+                explanation: "RQ/GT pins are used by other local bus masters to request and be granted control of the local bus."
+            },
+            {
+                en: "What is the role of the LOCK prefix instruction output in 8086 maximum mode?",
+                ar: "ما دور إخراج تعليقة بادئة LOCK في وضع الحد الأقصى لـ 8086؟",
+                options: ["Prevents other bus masters from gaining control of the system bus during execution", "Locks the keyboard", "Disables all interrupts", "Halts the processor clock"],
+                answer: 0,
+                explanation: "LOCK outputs low to prevent other bus masters from gaining system bus control during critical sequences."
+            },
+            {
+                en: "What is the width of the data bus in the Intel Pentium processor?",
+                ar: "ما هو عرض ناقل البيانات في معالج إنتل بينتيوم (Pentium)؟",
+                options: ["16 bits", "32 bits", "64 bits", "128 bits"],
+                answer: 2,
+                explanation: "The Pentium processor features a 64-bit data bus (D0 to D63)."
+            },
+            {
+                en: "How many address lines (A3 to A31) does the Pentium processor have?",
+                ar: "كم عدد خطوط العناوين (A3 إلى A31) التي يمتلكها معالج بينتيوم؟",
+                options: ["20 lines", "29 lines", "32 lines", "16 lines"],
+                answer: 1,
+                explanation: "Pentium has 29 address lines (A3 to A31), since the data bus is 8 bytes wide."
+            },
+            {
+                en: "What do the Byte Enable signals BE0# to BE7# do in the Pentium processor?",
+                ar: "ما ماذا تفعل إشارات تمكين البايت BE0# إلى BE7# في معالج بينتيوم؟",
+                options: ["Identify which of the 8 bytes on the data bus are to be read or written", "Enable cache memory", "Check for parity errors", "Control interrupt masking"],
+                answer: 0,
+                explanation: "BE0# to BE7# low-active signals identify the specific set of bytes to read or write across the 64-bit data bus."
+            },
+            {
+                en: "What does the KEN# (Cache Enable) signal do in the Pentium processor?",
+                ar: "ماذا تفعل إشارة KEN# (تمكين الذاكرة المخبأة) في معالج بينتيوم؟",
+                options: ["Determines whether the system can support a cache line fill during the current cycle", "Resets internal caches", "Flushes floating point registers", "Disables L1 cache"],
+                answer: 0,
+                explanation: "KEN# is used to determine if the system can support a cache line fill during the current bus cycle."
+            },
+            {
+                en: "What is the execution start address of the Pentium processor after a hardware RESET?",
+                ar: "ما هو عنوان بدء التنفيذ لمعالج بينتيوم بعد عملية إعادة ضبط (RESET) هاردوير؟",
+                options: ["00000000H", "FFFFFFFFH", "FFFFFFF0H", "00007C00H"],
+                answer: 2,
+                explanation: "After RESET, the Pentium starts execution at address FFFFFFF0H."
+            },
+            {
+                en: "What is the main difference between RESET and INIT signals in the Pentium processor?",
+                ar: "ما الفرق الأساسي بين إشارتي RESET و INIT في معالج بينتيوم؟",
+                options: ["INIT does not flush internal caches and floating-point registers", "RESET does not clear registers", "INIT clears RAM contents", "There is no difference"],
+                answer: 0,
+                explanation: "INIT forces execution in a known state like RESET, but internal caches and floating-point registers are not flushed."
+            },
+            {
+                en: "What is the duty cycle of the asymmetric square wave clock input for 8086?",
+                ar: "ما هي نسبة دورة التشغيل (duty cycle) لموجة ساعة الإدخال غير المتماثلة لمعالج 8086؟",
+                options: ["50%", "33%", "25%", "75%"],
+                answer: 1,
+                explanation: "The clock input is an asymmetric square wave with a 33% duty cycle."
+            },
+            {
+                en: "What does the INTR (Interrupt Request) pin do on the 8086 microprocessor?",
+                ar: "ماذا يفعل طرف INTR (طلب المقاطعة) في معالج 8086؟",
+                options: ["Provides a maskable hardware interrupt request sampled during instruction end", "Triggers a non-maskable interrupt", "Acknowledges DMA", "Resets the processor"],
+                answer: 0,
+                explanation: "INTR is a triggered maskable input sampled during the last clock cycles of each instruction."
+            },
+            {
+                en: "What is a Non-Maskable Interrupt (NMI)?",
+                ar: "ما هي المقاطعة غير القابلة للجبن/الحجب (NMI)؟",
+                options: ["An interrupt that cannot be ignored or disabled by software flags", "An interrupt used for software debugging", "An internal arithmetic error", "A low-priority reset"],
+                answer: 0,
+                explanation: "NMI is an external interrupt that is processed regardless of interrupt flag status."
+            },
+            {
+                en: "In Little-endian byte ordering, where is the least significant byte stored?",
+                ar: "في ترتيب البايتات من نوع Little-endian، أين يتم تخزين البايت الأقل أهمية (LSB)؟",
+                options: ["At the highest memory address", "At the lowest memory address", "In the cache memory", "In the stack pointer"],
+                answer: 1,
+                explanation: "In little-endian byte ordering, the least significant byte is stored at the lowest memory address."
+            },
+            {
+                en: "What is the storage element in a DRAM cell?",
+                ar: "ما هو عنصر التخزين في خلية DRAM؟",
+                options: ["A flip-flop latch", "A charge on a capacitor", "A magnetic core", "An optical pit"],
+                answer: 1,
+                explanation: "DRAMs store data bits as a charge on a capacitor."
+            },
+            {
+                en: "What is the basic storage cell used in Flash memory?",
+                ar: "ما هي خلية التخزين الأساسية المستخدمة في ذاكرة الفلاش؟",
+                options: ["Bipolar junction transistor", "MOS transistor with a floating gate", "Capacitor and resistor", "Schottky diode"],
+                answer: 1,
+                explanation: "Flash memory uses a MOS transistor with a floating gate as the basic storage cell."
+            },
+            {
+                en: "What distinguishes SIMMs from DIMMs regarding data path width?",
+                ar: "ما الذي يميز SIMMs عن DIMMs فيما يتعلق بعرض مسار البيانات؟",
+                options: ["SIMMs have a 32-bit data path, while DIMMs have a 64-bit data path", "SIMMs have 64-bit, DIMMs have 32-bit", "Both have 16-bit paths", "DIMMs only have 8-bit paths"],
+                answer: 0,
+                explanation: "SIMMs have a 32-bit data path with I/O on one side, whereas DIMMs have a 64-bit data path with I/O on both sides."
+            },
+            {
+                en: "What is virtual memory designed to eliminate?",
+                ar: "ما الذي تم تصميم الذاكرة الافتراضية لإلغائه أو القضاء عليه؟",
+                options: ["The physical memory size restriction", "The need for a hard disk", "Processor clock skew", "Bus contention"],
+                answer: 0,
+                explanation: "Virtual memory was developed to eliminate the physical memory size restriction by mapping virtual addresses to physical ones."
+            },
+            {
+                en: "What happens during a Cache Memory Read Hit?",
+                ar: "ماذا يحدث أثناء إصابة قراءة الذاكرة المخبأة (Cache Read Hit)؟",
+                options: ["The requested data resides in the cache; system bus buffers are disabled", "Data is fetched from the hard disk", "A page fault occurs", "Main memory is accessed directly"],
+                answer: 0,
+                explanation: "During a read hit, requested data is in the cache and system bus buffers are disabled."
+            },
+            {
+                en: "What occurs during a Cache Memory Read Miss?",
+                ar: "ما الذي يحدث أثناء خطأ قراءة الذاكرة المخبأة (Cache Read Miss)؟",
+                options: ["Buffers are enabled to fetch data from main memory", "The processor shuts down", "Cache memory is cleared", "An interrupt is generated"],
+                answer: 0,
+                explanation: "During a read miss, data is not in cache, so buffers are enabled to retrieve it from main memory."
+            },
+            {
+                en: "What does 'Miss Penalty' refer to in cache performance?",
+                ar: "إلى ماذا يشير مصطلح 'Miss Penalty' في أداء الذاكرة المخبأة؟",
+                options: ["The time required to process a miss, including block replacement and delivery to CPU", "The financial cost of cache RAM", "The number of cache lines", "The clock frequency drop"],
+                answer: 0,
+                explanation: "Miss penalty is the time required to process a miss, replacing the block and delivering data to the processor."
+            },
+            {
+                en: "What are the three main cache mapping techniques?",
+                ar: "ما هي تقنيات ربط الذاكرة المخبأة الثلاث الرئيسية؟",
+                options: ["Direct, Set-Associative, and Associative mapping", "FIFO, LIFO, and Random", "Static, Dynamic, and Virtual", "Read, Write, and Update"],
+                answer: 0,
+                explanation: "Cache mapping includes Direct Mapping, Set-Associative Mapping, and Associative Mapping."
+            },
+            {
+                en: "In assembly language, how many bytes is a standard 'word' defined as?",
+                ar: "في لغة التجميع، كم عدد البايتات التي تُعرف بها 'الكلمة' (word) القياسية؟",
+                options: ["1 byte", "2 bytes", "4 bytes", "8 bytes"],
+                answer: 1,
+                explanation: "For historical reasons, assembly language defines a word as exactly two bytes."
+            },
+            {
+                en: "What is a 32-bit entity called in assembly language terminology?",
+                ar: "ماذا يسمى الكيان ذو ال32 بتاً في مصطلحات لغة التجميع؟",
+                options: ["Word", "Double-word", "Quad-word", "Byte"],
+                answer: 1,
+                explanation: "In assembly language, a 32-bit entity is called a double-word, and 64 bits is a quad-word."
+            },
+            {
+                en: "What is the primary function of the File Allocation Table (FAT) in a magnetic hard drive?",
+                ar: "ما هي الوظيفة الأساسية لجدول تخصيص الملفات (FAT) في القرص الصلب المغناطيسي؟",
+                options: ["Keeps track of file names, locations, size, and more", "Controls motor spin speed", "Manages cache hit rates", "Translates virtual addresses"],
+                answer: 0,
+                explanation: "FAT keeps track of file names, locations, size, and more on hard drive platters."
+            },
+            {
+                en: "What method of binary encoding is used in optical storage (CDs) to represent ones and zeros?",
+                ar: "ما هي طريقة الترميز الثنائي المستخدمة في التخزين البصري (CDs) لتمثيل الواحدات والأصفار؟",
+                options: ["Negative non-return to zero encoding", "Manchester encoding", "ASCII encoding", "Two's complement"],
+                answer: 0,
+                explanation: "Binary data in CDs is encoded with negative non-return to zero encoding, where a change represents 1 and no change represents 0."
+            }
+        ];
+
+        let currentQuestion = 0;
+        let score = 0;
+        let userAnswers = [];
+        let studentName = "";
+
+        function startQuiz() {
+            const nameInput = document.getElementById("fullName").value.trim();
+            if (!nameInput) {
+                alert("يرجى إدخال اسم الطالب قبل بدء الامتحان / Please enter your name.");
+                return;
+            }
+            studentName = nameInput;
+            document.getElementById("student-badge").innerText = studentName;
+            document.getElementById("student-badge").classList.remove("hidden");
+
+            document.getElementById("welcome-screen").classList.add("hidden");
+            document.getElementById("quiz-screen").classList.remove("hidden");
+            
+            userAnswers = new Array(questions.length).fill(null);
+            loadQuestion();
+        }
+
+        function loadQuestion() {
+            const q = questions[currentQuestion];
+            document.getElementById("q-num").innerText = currentQuestion + 1;
+            document.getElementById("question-text-en").innerText = q.en;
+            document.getElementById("question-text-ar").innerText = q.ar;
+
+            const progressPercent = Math.round(((currentQuestion + 1) / questions.length) * 100);
+            document.getElementById("progress-text").innerText = `السؤال ${currentQuestion + 1} من ${questions.length}`;
+            document.getElementById("progress-percent").innerText = `${progressPercent}%`;
+            document.getElementById("progress-bar").style.width = `${progressPercent}%`;
+
+            const container = document.getElementById("options-container");
+            container.innerHTML = "";
+
+            q.options.forEach((opt, idx) => {
+                const isSelected = userAnswers[currentQuestion] === idx;
+                const btn = document.createElement("button");
+                btn.className = `w-full text-right p-3.5 rounded-lg border transition text-sm sm:text-base flex justify-between items-center ${
+                    isSelected 
+                        ? 'bg-blue-600 border-blue-500 text-white font-medium' 
+                        : 'bg-slate-900 border-slate-700 hover:border-slate-500 text-slate-200'
+                }`;
+                btn.innerHTML = `<span>${opt}</span> <span class="text-xs px-2 py-1 rounded bg-slate-800 text-slate-400">${String.fromCharCode(65 + idx)}</span>`;
+                btn.onclick = () => selectOption(idx);
+                container.appendChild(btn);
+            });
+
+            document.getElementById("prev-btn").disabled = currentQuestion === 0;
+            const nextBtn = document.getElementById("next-btn");
+            if (currentQuestion === questions.length - 1) {
+                nextBtn.innerText = "تسليم الامتحان (Submit)";
+                nextBtn.className = "bg-emerald-600 hover:bg-emerald-500 text-white px-6 py-2 rounded-lg text-sm transition";
+            } else {
+                nextBtn.innerText = "التالي (Next)";
+                nextBtn.className = "bg-blue-600 hover:bg-blue-500 text-white px-6 py-2 rounded-lg text-sm transition";
+            }
+        }
+
+        function selectOption(idx) {
+            userAnswers[currentQuestion] = idx;
+            loadQuestion();
+        }
+
+        fn = nextQuestion; // helper alias
+        function nextQuestion() {
+            if (userAnswers[currentQuestion] === undefined || userAnswers[currentQuestion] === null) {
+                if(!confirm("لم تقم باختيار إجابة، هل تريد المتابعة بدون إجابة؟ / You haven't selected an answer. Proceed anyway?")) return;
+            }
+
+            if (currentQuestion < questions.length - 1) {
+                currentQuestion++;
+                loadQuestion();
+            } else {
+                finishQuiz();
+            }
+        }
+
+        function prevQuestion() {
+            if (currentQuestion > 0) {
+                currentQuestion--;
+                loadQuestion();
+            }
+        }
+
+        function finishQuiz() {
+            score = 0;
+            let incorrect = 0;
+            userAnswers.forEach((ans, idx) => {
+                if (ans === questions[idx].answer) {
+                    score++;
+                } else {
+                    incorrect++;
+                }
+            });
+
+            const percentage = Math.round((score / questions.length) * 100);
+
+            document.getElementById("quiz-screen").classList.add("hidden");
+            document.getElementById("result-screen").classList.remove("hidden");
+            document.getElementById("result-student-name").innerText = `الطالب: ${studentName}`;
+            document.getElementById("score-percentage").innerText = `${percentage}%`;
+            document.getElementById("correct-count").innerText = score;
+            document.getElementById("incorrect-count").innerText = incorrect;
+        }
+
+        function downloadResultFile() {
+            const incorrect = questions.length - score;
+            const percentage = Math.round((score / questions.length) * 100);
+            const content = `--- COMPUTER ARCHITECTURE EXAM REPORT ---
+Student Name: ${studentName}
+Total Questions: ${questions.length}
+Correct Answers: ${score}
+Incorrect Answers: ${incorrect}
+Final Score: ${percentage}%
+Date: ${new Date().toLocaleString()}
+------------------------------------------`;
+
+            const blob = new Blob([content], { type: 'text/plain;charset=utf-8' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `${studentName}_Exam_Result.txt`;
+            a.click();
+            URL.revokeObjectURL(url);
+        }
+
+        function showReviewScreen() {
+            document.getElementById("result-screen").classList.add("hidden");
+            document.getElementById("review-screen").classList.remove("hidden");
+
+            const container = document.getElementById("review-container");
+            container.innerHTML = "";
+
+            questions.forEach((q, idx) => {
+                const userAns = userAnswers[idx];
+                const isCorrect = userAns === q.answer;
+                const div = document.createElement("div");
+                div.className = `p-4 rounded-lg border ${isCorrect ? 'border-emerald-600/50 bg-emerald-950/20' : 'border-rose-600/50 bg-rose-950/20'}`;
+                
+                div.innerHTML = `
+                    <p class="font-bold text-slate-100 text-sm mb-1">Q${idx + 1}: ${q.en}</p>
+                    <p class="text-xs text-slate-400 italic mb-2">${q.ar}</p>
+                    <p class="text-xs text-slate-300 mb-1">Your Answer: <span class="${isCorrect ? 'text-emerald-400 font-semibold' : 'text-rose-400 font-semibold'}">${userAns !== null ? q.options[userAns] : 'No Answer'}</span></p>
+                    <p class="text-xs text-slate-300 mb-2">Correct Answer: <span class="text-emerald-400 font-semibold">${q.options[q.answer]}</span></p>
+                    <p class="text-xs bg-slate-900 p-2 rounded text-slate-300 border border-slate-700"><strong>Explanation:</strong> ${q.explanation}</p>
+                `;
+                container.appendChild(div);
+            });
+        }
+    </script>
+</body>
+</html>
