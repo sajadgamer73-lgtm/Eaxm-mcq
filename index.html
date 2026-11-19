@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'unsafe-inline' 'self'; script-src 'unsafe-inline' 'self' https://cdn.tailwindcss.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data:">
     <title>اختبار تركيب ومعمارية الحاسوب</title>
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -616,7 +617,7 @@ Date: ${new Date().toLocaleString()}
             const url = URL.createObjectURL(blob);
             const a = document.createElement('a');
             a.href = url;
-            a.download = `${studentName}_Exam_Result.txt`;
+            a.download = `${studentName.replace(/[\\/:*?"<>|]/g,"_")||"student"}_Exam_Result.txt`;
             a.click();
             URL.revokeObjectURL(url);
         }
